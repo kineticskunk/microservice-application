@@ -17,14 +17,10 @@ class Student(db.Model):
   def __repr__(self):
     return f"Student('{self.name}','{self.physics}','{self.maths}','{self.chemistry}')"
 
-
 #curl -i http://127.0.0.1:5000/
 # @app.route('/', methods=["GET"])
 # def retreive_results():
 
-
-
-  
 #   data = Student.query.all()
 
 #   output = []
@@ -83,8 +79,6 @@ def results():
   # new_student = Student(name = data['name'],physics= data['physics'],maths= data['maths'], chemistry=data['chemistry'])
   # db.session.add(new_student)
   # db.session.commit()
-
-
 
 #curl -i -H "Content-Type: application/json" -X PUT -d "{\"name\":\"Sivu\",\"physics\":10,\"maths\":40,\"chemistry\":30}" http://127.0.0.1:5000/results/<intID>
 @app.route('/results/<int:indexId>', methods=['PUT'])
