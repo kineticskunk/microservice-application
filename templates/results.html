@@ -5,20 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="static/style.css" />
     <script src="main.js"></script>
 </head>
 <body>
+  <table class="table" style="word-wrap: break-word; min-width: 200px; max-width: 500px">
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>physics</th>
+      <th>maths</th>
+      <th>chemistry</th>
+      </tr>
     <p>These are the results</p>
     {% for x in data %}
+    <tr>
       <div>
-        <p>{{ x.id }}</p>
-        <p>{{ x.name }}</p>
-        <p>{{ x.physics }}</p> 
-        <p>{{ x.maths }}</p> 
-        <p>{{ x.chemistry }}</p>
+        <td>{{ x.id }}</td>
+        <td>{{ x.name }}</td>
+        <td>{{ x.physics }}</td> 
+        <td>{{ x.maths }}</td> 
+        <td>{{ x.chemistry }}</td>
       </div>
+      </tr>
     {% endfor %}
+</table>
 
 </body>
 </html>
