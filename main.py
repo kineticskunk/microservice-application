@@ -17,47 +17,6 @@ class Student(db.Model):
   def __repr__(self):
     return f"Student('{self.name}','{self.physics}','{self.maths}','{self.chemistry}')"
 
-
-#curl -i http://127.0.0.1:5000/
-# @app.route('/', methods=["GET"])
-# def retreive_results():
-
-
-
-  
-#   data = Student.query.all()
-
-#   output = []
-
-#   for x in data:
-#     student_data = {}
-#     student_data['id'] = x.id
-#     student_data['name'] = x.name
-#     student_data['physics'] = x.physics
-#     student_data['maths'] = x.maths
-#     student_data['chemistry'] = x.chemistry
-#     output.append(student_data)
-
-#   return jsonify({'student': output})
-
-#curl -i http://127.0.0.1:5000/results/<intID>
-# @app.route('/results/<int:indexId>',methods=["GET"])
-# def get_one_student(indexId):
-#   student = Student.query.filter_by(id = indexId).first()
-
-#   if not student:
-#     return jsonify({'message':'No user found'})
-
-#   student_data = {}
-#   student_data['id'] = student.id
-#   student_data['name'] = student.name
-#   student_data['physics'] = student.physics
-#   student_data['maths'] = student.maths
-#   student_data['chemistry'] = student.chemistry
-
-#   return jsonify({'student':student_data})
-
-#curl -i -H "Content-Type: application/json" -X POST -d "{\"name\":\"Sivu\",\"physics\":30,\"maths\":90,\"chemistry\":10}"" http://127.0.0.1:5000/results
 @app.route('/', methods=['GET','POST'])
 def add_results():
     form = StudentForm()
@@ -74,19 +33,6 @@ def results():
   data = Student.query.all()
   return render_template('results.html', data = data)
 
-
-  # data = request.get_json()
-
-  # if not data or not 'name' in data:
-  #   abort(400)
-
-  # new_student = Student(name = data['name'],physics= data['physics'],maths= data['maths'], chemistry=data['chemistry'])
-  # db.session.add(new_student)
-  # db.session.commit()
-
-
-
-#curl -i -H "Content-Type: application/json" -X PUT -d "{\"name\":\"Sivu\",\"physics\":10,\"maths\":40,\"chemistry\":30}" http://127.0.0.1:5000/results/<intID>
 @app.route('/results/<int:indexId>', methods=['PUT'])
 def update_results(indexId):
   
@@ -103,7 +49,6 @@ def update_results(indexId):
   
   return jsonify({'student':'Pass'})
 
-#curl -i -H "Content-Type: application/json" -X DELETE http://127.0.0.1:5000/results/<intID>
 @app.route('/results/<int:indexId>', methods=['DELETE'])
 def delete_student(indexId):
 
