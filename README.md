@@ -7,10 +7,12 @@ Prerequisites
   - $ install python
   - $ install pip
   - $ install flask
+  - $ install flask_sqlalchemy
  
 Running python program
  
   - $ cd API-Build-And-Testing-Project
+  - $ python db.py
   - $ python main.py
 
 Routes 
