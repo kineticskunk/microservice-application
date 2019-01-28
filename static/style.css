@@ -31,7 +31,6 @@
 
 body{
     text-align: center;
-    background-color: red;
   }
   
   
@@ -39,11 +38,11 @@ body{
     display: inline-block;
   }
   
-  /* h1{
+  h1{
     text-align: center ;
     background-color: aquamarine;
     
-  }  */
+  } 
 
   
   .container {
