@@ -11,7 +11,7 @@ Prerequisites
  
 Running python program
  
-  - $ cd API-Build-And-Testing-Project
+  - $ cd microservice-application
   - $ python db.py
   - $ python main.py
 
