@@ -75,33 +75,53 @@ def results():
   return render_template('results.html', data = data)
 
 
-  # data = request.get_json()
-
-  # if not data or not 'name' in data:
-  #   abort(400)
-
-  # new_student = Student(name = data['name'],physics= data['physics'],maths= data['maths'], chemistry=data['chemistry'])
-  # db.session.add(new_student)
-  # db.session.commit()
-
+  
 
 
 #curl -i -H "Content-Type: application/json" -X PUT -d "{\"name\":\"Sivu\",\"physics\":10,\"maths\":40,\"chemistry\":30}" http://127.0.0.1:5000/results/<intID>
-@app.route('/results/<int:indexId>', methods=['PUT'])
-def update_results(indexId):
+@app.route('/results/<int:student_id>')
+def student(student_id):
   
-  student = Student.query.filter_by(id = indexId).first()
+  student = Student.query.get_or_404(student_id)
 
-  if not student:
-    return jsonify({'message' : 'No Student found'})
+  return render_template('student.html', student=student)
 
-  student.name = request.json['name']
-  student.physics = request.json.get('physics', "")
-  student.maths = request.json.get('maths', "")
-  student.chemistry = request.json.get('chemistry', "") 
-  db.session.commit()
-  
-  return jsonify({'student':'Pass'})
+@app.route('/results/<int:student_id>/update', methods=['GET','POST'])
+def update_student(student_id):
+    student = Student.query.get_or_404(student_id)
+    form = StudentForm()
+    if form.validate_on_submit():
+        student.name = form.name.data 
+        student.physics = form.physics.data  
+        student.maths =  form.maths.data
+        student.chemistry = form.chemistry.data          
+        db.session.commit()
+        return redirect(url_for('student', student_id=student.id))
+    elif request.method == 'GET': 
+         form.physics.data = student.name  
+         form.physics.data = student.physics
+         form.maths.data = student.maths
+         form.chemistry.data = student.chemistry   
+    return render_template('home.html', form=form)
+
+
+
+@app.route("/results/<int:student_id>/delete", methods=['GET'])
+def delete_student(student_id):
+    student = Student.query.get_or_404(student_id)
+    db.session.delete(student)
+    db.session.commit() 
+    return redirect(url_for('results'))       
+
+
+
+
+
+
+
+
+
+
 
 #curl -i -H "Content-Type: application/json" -X DELETE http://127.0.0.1:5000/results/<intID>
 @app.route('/results/<int:indexId>', methods=['DELETE'])
