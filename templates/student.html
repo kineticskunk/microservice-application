@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="static/style.css" />
+  <script src="main.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <table class="table" style="word-wrap: break-word; min-width: 200px; max-width: 500px">
+      <tr>
+        <th>Name</th>
+        <th>Physics</th>
+        <th>Maths</th>
+        <th>Chemistry</th>
+      </tr>
+      <p>These are the results</p>
+      <tr>
+        <div>
+          <td>{{ student.name }}</td>
+          <td>{{ student.physics }}</td>
+          <td>{{ student.maths }}</td>
+          <td>{{ student.chemistry }}</td>
+        </div>
+      </tr>
+    </table>
+    <a href="{{url_for('update_student',  student_id = student.id)}}"><button>Update</button></a>
+
+  </div>
+  <!-- <a href="/results/<int:student_id>/delete"><button></button>Delete</a> -->
+
+</body>
+
+</html>
