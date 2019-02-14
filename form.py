@@ -13,3 +13,6 @@ class StudentForm(FlaskForm):
     chemistry = IntegerField('Chemistry', validators=[DataRequired()])
 
     submit = SubmitField('Submit')
+
+
+# IntegerField('Telephone', [validators.NumberRange(min=0, max=10)])

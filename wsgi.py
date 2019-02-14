@@ -2,10 +2,10 @@ from flask import Flask,render_template, redirect, url_for,request, jsonify, abo
 from flask_sqlalchemy import SQLAlchemy
 from form import StudentForm
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
+application = Flask(__name__)
+application.config['SECRET_KEY'] = 'secret'
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(application)
 
 class Student(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -14,10 +14,7 @@ class Student(db.Model):
   maths = db.Column(db.Integer)
   chemistry = db.Column(db.Integer)
 
-  def __repr__(self):
-    return f"Student('{self.name}','{self.physics}','{self.maths}','{self.chemistry}')"
-
-@app.route('/', methods=['GET','POST'])
+@application.route('/', methods=['GET','POST'])
 def add_results():
     form = StudentForm()
     if form.validate_on_submit():
@@ -28,12 +25,12 @@ def add_results():
     else:
       return render_template('home.html', form=form)
 
-@app.route('/results', methods=['GET','POST'])
+@application.route('/results', methods=['GET','POST'])
 def results():
   data = Student.query.all()
   return render_template('results.html', data = data)
 
-@app.route('/results/<int:indexId>', methods=['PUT'])
+@application.route('/results/<int:indexId>', methods=['PUT'])
 def update_results(indexId):
   
   student = Student.query.filter_by(id = indexId).first()
@@ -49,7 +46,7 @@ def update_results(indexId):
   
   return jsonify({'student':'Pass'})
 
-@app.route('/results/<int:indexId>', methods=['DELETE'])
+@application.route('/results/<int:indexId>', methods=['DELETE'])
 def delete_student(indexId):
 
   student = Student.query.filter_by(id = indexId).first()
@@ -63,4 +60,4 @@ def delete_student(indexId):
   return jsonify({'message':'Student found and Deleted'})
 
 if __name__ == '__main__':
- app.run(debug=True)
+ application.run(debug=True)
