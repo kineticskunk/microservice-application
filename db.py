@@ -1,5 +1,5 @@
-from main import db
-from main import Student
+from wsgi import db
+from wsgi import Student
 import os
 
 
